@@ -46,8 +46,10 @@ public class Heroi : MonoBehaviour
     void Mover()
     {
         float velocidadeZ = Input.GetAxis("Vertical") * 3;
+        float velocidadeX = 0;
+        Vector3 velocidadeCorrigida = velocidadeX * transform.right + velocidadeZ * transform.forward;
 
-        Corpo.velocity = new Vector3(0, 0, velocidadeZ);
+        Corpo.velocity = new Vector3(velocidadeCorrigida.x, 0, velocidadeCorrigida.z);
      
         if(Corpo.velocity.magnitude > 1)
         {
@@ -57,6 +59,15 @@ public class Heroi : MonoBehaviour
         {
             ControlAnim.SetBool("Andar", false);
         }
+        Girar();
+    }
+
+
+    void Girar()
+    {
+        float GiroY = Input.GetAxis("Horizontal") * 100 * Time.deltaTime;
+        transform.Rotate(Vector3.up * GiroY);
+
     }
 
     void ControleAtaque()

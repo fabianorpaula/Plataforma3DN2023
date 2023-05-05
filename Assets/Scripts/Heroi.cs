@@ -31,14 +31,11 @@ public class Heroi : MonoBehaviour
     {
         
         
-        if (Input.GetKeyDown(KeyCode.P))
-        {
-            ControlAnim.SetTrigger("Pegar");
-        }
+        
             
 
         ControleAtaque();
-        
+        Pegar();
         Mover();
     }
 
@@ -62,6 +59,13 @@ public class Heroi : MonoBehaviour
         Girar();
     }
 
+    void Pegar()
+    {
+        if (Input.GetKeyDown(KeyCode.T) || Input.GetKeyDown(KeyCode.Joystick1Button3))
+        {
+            ControlAnim.SetTrigger("Pegar");
+        }
+    }
 
     void Girar()
     {
@@ -72,12 +76,12 @@ public class Heroi : MonoBehaviour
 
     void ControleAtaque()
     {
-        if (Input.GetKeyDown(KeyCode.Joystick1Button2) || Input.GetKeyDown(KeyCode.X))
+        if (Input.GetKeyDown(KeyCode.Joystick1Button4) || Input.GetKeyDown(KeyCode.X))
         {
             ControlAnim.SetTrigger("Ataque");
         }
 
-        if (Input.GetKeyDown(KeyCode.Alpha2))
+        if (Input.GetKeyDown(KeyCode.Alpha2) || Input.GetKeyDown(KeyCode.Joystick1Button5))
         {
             ControlAnim.SetTrigger("Disparo");
         }

@@ -10,6 +10,7 @@ public class Heroi : MonoBehaviour
     public GameObject MeuAtaque;
     private Animator ControlAnim;
     private GerenciadorDeObjetos Inventario;
+    private bool estaNochao = true;
 
     //Movimento
     private Rigidbody Corpo;
@@ -37,8 +38,23 @@ public class Heroi : MonoBehaviour
         ControleAtaque();
         Pegar();
         Mover();
+        Pular();
     }
 
+
+    void Pular()
+    {
+        if(Input.GetKeyDown(KeyCode.Space) || Input.GetKeyDown(KeyCode.Joystick1Button0))
+        {
+            if(estaNochao == true)
+            {
+                Corpo.AddForce(Vector3.up * 250);
+                estaNochao = false;
+            }
+            
+        }
+        
+    }
 
     void Mover()
     {
@@ -46,7 +62,7 @@ public class Heroi : MonoBehaviour
         float velocidadeX = 0;
         Vector3 velocidadeCorrigida = velocidadeX * transform.right + velocidadeZ * transform.forward;
 
-        Corpo.velocity = new Vector3(velocidadeCorrigida.x, 0, velocidadeCorrigida.z);
+        Corpo.velocity = new Vector3(velocidadeCorrigida.x, Corpo.velocity.y, velocidadeCorrigida.z);
      
         if(Corpo.velocity.magnitude > 1)
         {
@@ -151,6 +167,8 @@ public class Heroi : MonoBehaviour
 
         }
 
+
+       
        
     }
 
@@ -161,6 +179,7 @@ public class Heroi : MonoBehaviour
             if(vivo == true)
             {
                 hp--;
+                Corpo.AddForce(Vector3.forward * -500);
                 ControlAnim.SetTrigger("TomouDano");
                 if (hp <= 0)
                 {
@@ -169,6 +188,11 @@ public class Heroi : MonoBehaviour
                 }
             }
             
+        }
+
+        if (colidiu.gameObject.tag == "Chao")
+        {
+            estaNochao = true;
         }
 
     }

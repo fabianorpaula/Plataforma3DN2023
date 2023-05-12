@@ -20,7 +20,7 @@ public class Heroi : MonoBehaviour
     public bool vivo = true;
     void Start()
     {
-        Inventario = GameObject.FindGameObjectWithTag("Inventario").GetComponent<GerenciadorDeObjetos>();
+        //Inventario = GameObject.FindGameObjectWithTag("Inventario").GetComponent<GerenciadorDeObjetos>();
         Destino = new Vector3(0, 0, 0);
 
 
